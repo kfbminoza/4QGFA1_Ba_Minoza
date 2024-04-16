@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Website Sign-Up</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <form id="signupForm" action="index.html">
+        <fieldset>
+            <legend><h1>Sign Up With Resma Daniel!</h1></legend>
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required onblur="validateInput(this)" onfocus="resetInput(this)"><br><br>
+            
+            <label for="username">Preferred Username:</label><br>
+            <input type="text" id="username" name="username" required onblur="validateInput(this)" onfocus="resetInput(this)"><br><br>
+            
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required onblur="validateInput(this)" onfocus="resetInput(this)"><br><br>
+            
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required onblur="validateInput(this)" onfocus="resetInput(this)"><br><br>
+            
+            <label for="address">Address:</label><br>
+            <input type="text" id="address" name="address" onblur="validateInput(this)" onfocus="resetInput(this)"><br><br>
+            
+            <label for="gender">Gender:</label><br>
+            <select id="gender" name="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Prefer not to mention</option>
+            </select><br><br>
+            
+            <label for="interests">Interests:</label><br>
+            <textarea id="interests" name="interests" rows="4" cols="50" onblur="validateInput(this)" onfocus="resetInput(this)"></textarea><br><br>
+
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset" onclick="resetForm()">
+        </fieldset>
+        
+    </form>
+
+    <fieldset id="outputFieldset">
+        <legend><h1>Resma Daniel's Output</h1></legend>
+        <div id="output"></div>
+    </fieldset>
+
+    <script>
+        function resetForm(){
+            document.getElementById("output").innerHTML = " ";
+        }
+
+        function validateInput(element) {
+            if (element.value === "") {
+                element.classList.add("error");
+            } else {
+                element.classList.remove("error");
+                element.classList.add("success");
+            }
+        }
+
+        function resetInput(element) {
+            element.classList.remove("error");
+            element.classList.remove("success");
+        }
+
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            var formData = new FormData(this);
+            var output = "<h2>Submitted Information:</h2>";
+
+            for (var p of formData.entries()) {
+                output += "<p><strong>" + p[0] + ":</strong> " + p[1] + "</p>";
+            }
+
+            document.getElementById("output").innerHTML = output;
+        });
+    </script>
+</body>
+</html>
